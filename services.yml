@@ -69,7 +69,7 @@ services:
       - { name: drupal.command }
   console.settings_set:
     class: Drupal\Console\Core\Command\Settings\SetCommand
-    arguments: ['@console.configuration_manager', '@console.nested_array']
+    arguments: ['@console.settings_manager']
     tags:
       - { name: drupal.command }
   console.exec:
@@ -111,3 +111,6 @@ services:
     class: Drupal\Console\Core\Generator\SiteAliasGenerator
     tags:
       - { name: drupal.generator }
+  console.settings_manager:
+      class: Drupal\Console\Core\Utils\SettingsManager
+      arguments: ['@console.configuration_manager', '@console.translator_manager', '@console.nested_array']
